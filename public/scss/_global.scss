@@ -1,0 +1,135 @@
+$blue-primary : #6772e5;
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    &:focus {
+        outline: none;
+    }
+
+    &.btn-icon {
+        background: transparent;
+        margin-bottom: 10px;
+
+        &:hover {
+            background: transparent;
+        }
+    }
+}
+
+//scrollbar
+
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(103, 114, 229, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #6772e5;
+}
+
+//custom checkbox
+/* The container */
+.custom-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 27px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    user-select: none;
+
+    .checkmark {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 5px;
+    }
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    input:checked~.checkmark {
+        background-color: $blue-primary;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    input:checked~.checkmark:after {
+        display: block;
+    }
+
+    .checkmark:after {
+        left: 50%;
+        top: 50%;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: translateX(-50%) translateY(-50%) rotate(45deg)
+    }
+
+}
+
+.inline-input-group {
+    display: flex;
+    align-items: center;
+
+    #id {
+        width: 55px;
+        margin-right: 10px;
+    }
+}
+
+.radio-inline {
+    display: flex;
+    align-items: center;
+
+    label {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+
+        input {
+            width: 15px;
+            height: 15px;
+            margin: 0;
+            margin-left: 2.5px;
+        }
+    }
+}
