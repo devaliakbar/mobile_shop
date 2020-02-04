@@ -17,11 +17,13 @@ var login = async (username, password) => {
         },
         body: JSON.stringify({ username, password })
     });
-    
+
     if (response.status == 200) {
         const content = await response.json();
         setCookie("token", content.token)
         setCookie("username", content.user.username)
         window.location.href = basicUrl;
+    } else {
+        alert("Wrong username or password")
     }
 }

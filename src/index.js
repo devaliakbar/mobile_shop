@@ -1,5 +1,7 @@
 const app = require('./app')
 const port = process.env.PORT
+
+
 const Customer = require("./models/customer")
 const Service = require("./models/service")
 const User = require("./models/user")
@@ -7,11 +9,11 @@ const User = require("./models/user")
 test()
 async function test() {
 
-    // const task = new User({
+    // const user = new User({
     //     username: "admin",
     //     password: "admin"
     // })
-    // await task.save()
+    // await user.save()
 
     // const service = new Service({
     //     type: "Computer",
