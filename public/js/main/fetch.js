@@ -6,7 +6,6 @@ var sendJsonRequest = async (path, passedMethod, passedBody) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + getCookie("token")
             },
             body: JSON.stringify({ passedBody })
         })
@@ -16,7 +15,6 @@ var sendJsonRequest = async (path, passedMethod, passedBody) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + getCookie("token")
             }
         })
     }
@@ -26,25 +24,34 @@ var sendJsonRequest = async (path, passedMethod, passedBody) => {
     } else if (response.status == 400) {
         relogin()
     } else {
-        return showFailed();
+        showFailed()
+        return
     }
 }
 
 var getPage = async (path) => {
     const response = await fetch(basicUrl + path, {
-        headers: {
-            'Authorization': 'Bearer ' + getCookie("token")
-        }
     })
     if (response.status == 200) {
         return await response.text()
     } else if (response.status == 400) {
         relogin()
     } else {
-        return showFailed();
+        showFailed()
+        return
     }
 }
 
+
+var logOut = async () => {
+    // const response = await fetch(basicUrl + "/logout", {})
+    deleteAllCookies()
+    window.location.replace(basicUrl + "login.html")
+}
+
+
+
 var showFailed = () => {
-    return "<h1>Failed To Fetch</h1>"
+    hideLoader()
+    $("main").html("<h1>Failed To Fetch</h1>")
 }

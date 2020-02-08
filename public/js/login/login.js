@@ -1,3 +1,7 @@
+$(document).ready(function async() {
+    deleteAllCookies()
+});
+
 $("#login").click(function async() {
     var username = $("#username").val().trim()
     var password = $("#password").val().trim()
@@ -19,9 +23,10 @@ var login = async (username, password) => {
     });
 
     if (response.status == 200) {
-        const content = await response.json();
-        setCookie("token", content.token)
-        setCookie("username", content.user.username)
+        if ($('#keep_me_log_in').is(':checked')) {
+            setCookie("keep_me_log_in", "yes")
+        }
+        $.session.set("logged_in", "yes")
         window.location.href = basicUrl;
     } else {
         alert("Wrong username or password")

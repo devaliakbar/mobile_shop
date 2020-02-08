@@ -5,7 +5,7 @@ const Service = require("../models/service")
 
 const router = new express.Router()
 
-router.get('/service', auth, (req, res) => {
+router.get('/service_page', auth, (req, res) => {
     res.render('service/service', {
     })
 })

@@ -1,15 +1,16 @@
-if (getCookie("token") == "") {
-    window.location.href = basicUrl + "login.html";
-}
-
 $(document).ready(function async() {
     initialise()
 });
 
 initialise = async () => {
     showLoader()
-    setUpNavigationBar()
-    setUpCurrentPath()
+
+    if (getCookie("keep_me_log_in") != "yes" && $.session.get("logged_in") != "yes") {
+        logOut()
+    } else {
+        setUpNavigationBar()
+        setUpCurrentPath()
+    }
 }
 
 var setUpNavigationBar = () => {
@@ -26,10 +27,10 @@ var setUpCurrentPath = async () => {
     var currentPath = $.session.get("currentPath")
     switch (currentPath) {
         case "service":
-            currentBody = await getPage('service')
+            currentBody = await getPage('service_page')
             break;
         default:
-            currentBody = await getPage('service')
+            currentBody = await getPage('service_page')
             break;
     }
 

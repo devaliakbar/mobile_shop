@@ -1,6 +1,10 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+
+//COOKIE
+const cookieParser = require('cookie-parser');
+
 require('./db/mongoose')
 
 //ALL ROUTES
@@ -19,6 +23,9 @@ app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
 app.use(express.json())
+
+//COOKIE
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 //Setting Routes
 app.use(loginRoute)
