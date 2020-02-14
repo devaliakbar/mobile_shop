@@ -1,4 +1,4 @@
-var sendJsonRequest = async (path, passedMethod, passedBody) => {
+var sendJsonRequest = async (path, passedMethod, passedBody, justShowOutput) => {
     var response;
     if (passedMethod == "POST") {
         response = await fetch(basicUrl + path, {
@@ -19,13 +19,18 @@ var sendJsonRequest = async (path, passedMethod, passedBody) => {
         })
     }
 
-    if (response.status == 200) {
+    if (response.status == 200 || response.status == 201) {
         return await response.text()
-    } else if (response.status == 400) {
+    }
+
+    if (justShowOutput) {
+        return;
+    }
+
+    if (response.status == 400) {
         relogin()
     } else {
         showFailed()
-        return
     }
 }
 
@@ -34,18 +39,17 @@ var getPage = async (path) => {
     })
     if (response.status == 200) {
         return await response.text()
-    } else if (response.status == 400) {
+    }
+    if (response.status == 400) {
         relogin()
     } else {
         showFailed()
-        return
+
     }
 }
 
 
 var logOut = async () => {
-    // const response = await fetch(basicUrl + "/logout", {})
-    deleteAllCookies()
     window.location.replace(basicUrl + "login.html")
 }
 

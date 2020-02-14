@@ -1,5 +1,8 @@
 $(document).ready(function async() {
+    fetch(basicUrl + "logout", { method: "POST" })
     deleteAllCookies()
+    setCookie("keep_me_log_in", "false")
+    setCookie("logged_in", "false")
 });
 
 $("#login").click(function async() {
@@ -26,8 +29,8 @@ var login = async (username, password) => {
         if ($('#keep_me_log_in').is(':checked')) {
             setCookie("keep_me_log_in", "yes")
         }
-        $.session.set("logged_in", "yes")
-        window.location.href = basicUrl;
+        setCookie("logged_in", "yes",true)
+        window.location.replace(basicUrl)
     } else {
         alert("Wrong username or password")
     }

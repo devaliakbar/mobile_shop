@@ -122,14 +122,19 @@
 
 
 var basicUrl = window.location.origin + "/"
-var setCookie = (cname, cvalue, exdays) => {
+var setCookie = (cname, cvalue, untilBrowserClose, exdays) => {
     if (typeof exdays === "undefined" || exdays === null) {
         exdays = 365;
     }
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+
+    if (untilBrowserClose) {
+        document.cookie = cname + "=" + cvalue + ";path=/";
+    } else {
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 }
 
 var getCookie = (cname) => {

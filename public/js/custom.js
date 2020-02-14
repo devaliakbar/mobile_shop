@@ -1,5 +1,5 @@
 (function ($) {
-
+  // Navbar 
   var allPanels = $('.dropdown > ul').hide();
 
   $('.dropdown > a').click(function () {
@@ -15,16 +15,17 @@
 
   $(".sidenav-toggler-inner").click(function () {
     if (openedNav == 1) {
-      $.session.set("navigationBar", false);
+      setCookie("navigationBar", false)
       openedNav = 0;
       $("header nav").removeClass("pinned");
       $('main').removeClass("navPinned");
     } else {
-      $.session.set("navigationBar", true);
+      setCookie("navigationBar", true)
       openedNav = 1;
       $("header nav").addClass("pinned");
       $('main').addClass("navPinned");
     }
+
   });
 
   $("header nav").mouseenter(function () {
@@ -105,6 +106,19 @@
     $(".searchbox .form-additional").slideDown();
   })
 
+  if ($("main").hasClass("login-page")) {
+    $("header").hide();
+  }
+
+  //Add list
+  // $(".add-group button").click(function(){
+  //   var content =  $(this).siblings("input").val();
+  //   $(this).parent().siblings(".add-list").append("<div class='item'>"+content+"<span class='close'>X<span/></div>");
+  // })
+  // $(document).on('click','.close',function(){
+  //   $(this).parent().remove();
+  // });
+
 })(jQuery);
 
 var openedNav = 0;
@@ -124,4 +138,5 @@ function relogin() {
   setTimeout(function () {
     window.location.replace(basicUrl + "login.html")
   }, 2000);
+
 }
